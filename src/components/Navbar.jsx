@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { MdClose } from "react-icons/md";
+import { MdClose } from "react-icons/md"; // Close icon
 import logo from "../assets/images/logo.png";
 import userIcon from "../assets/images/user.png";
 import cartIcon from "../assets/images/shoppingbasket.png";
@@ -10,6 +10,7 @@ const Navbar = ({ cartCount }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Scroll to section if on the landing page
   const handleNavClick = (id) => {
     if (location.pathname === "/") {
       const section = document.getElementById(id);
@@ -21,6 +22,7 @@ const Navbar = ({ cartCount }) => {
     }
   };
 
+  // Listen for location changes and scroll if needed
   useEffect(() => {
     if (location.state?.scrollTo) {
       const section = document.getElementById(location.state.scrollTo);
@@ -67,27 +69,33 @@ const Navbar = ({ cartCount }) => {
         </div>
 
         {/* User Icon with Animated Rotating Border */}
-        <div className="relative cursor-pointer" onClick={() => setDropdownOpen(!dropdownOpen)}>
-          {/* Border Effect */}
-          <span className="absolute inset-0 rounded-full border-[3px] animate-rotate-border"></span>
-          <img src={userIcon} alt="User" className="w-12 h-12 rounded-full relative z-10" />
-        </div>
-
-        {/* Dropdown Menu */}
-        {dropdownOpen && (
-          <div className="absolute right-0 mt-3 w-44 bg-white shadow-lg rounded-lg p-2 z-50 transition-all duration-200 ease-in-out animate-fadeIn">
-            <div className="flex justify-between items-center px-3 py-2">
-              <span className="text-gray-700 font-semibold">Account</span>
-              <MdClose
-                className="text-gray-500 cursor-pointer hover:text-red-500"
-                size={20}
-                onClick={() => setDropdownOpen(false)}
-              />
-            </div>
-            <button className="block w-full text-left px-3 py-2 hover:bg-gray-100">Login</button>
-            <button className="block w-full text-left px-3 py-2 hover:bg-gray-100">Signup</button>
+        <div className="relative">
+          <div
+            className="relative w-12 h-12 flex items-center justify-center cursor-pointer rounded-full border-[3px] border-transparent user-icon"
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+          >
+            {/* Border Effect */}
+            <div className="absolute inset-0 rounded-full border-[3px] animate-rotate-border"></div>
+            <img src={userIcon} alt="User" className="w-8 h-8 z-10" />
           </div>
-        )}
+
+          {/* Dropdown Menu */}
+          {dropdownOpen && (
+            <div className="absolute right-0 mt-3 w-44 bg-white shadow-lg rounded-lg p-2 z-50 transition-all duration-200 ease-in-out animate-fadeIn">
+              {/* Close Button */}
+              <div className="flex justify-between items-center px-3 py-2">
+                <span className="text-gray-700 font-semibold">Account</span>
+                <MdClose
+                  className="text-gray-500 cursor-pointer hover:text-red-500"
+                  size={20}
+                  onClick={() => setDropdownOpen(false)}
+                />
+              </div>
+              <button className="block w-full text-left px-3 py-2 hover:bg-gray-100">Login</button>
+              <button className="block w-full text-left px-3 py-2 hover:bg-gray-100">Signup</button>
+            </div>
+          )}
+        </div>
       </div>
     </nav>
   );
