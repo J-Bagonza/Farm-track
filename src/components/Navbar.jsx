@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-scroll";
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 import logo from "../assets/images/logo.png";
 import userIcon from "../assets/images/user.png";
 import cartIcon from "../assets/images/shoppingbasket.png";
@@ -7,6 +7,7 @@ import cartIcon from "../assets/images/shoppingbasket.png";
 const Navbar = () => {
   const [cartCount, setCartCount] = useState(0);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const navigate = useNavigate(); // Hook for navigation
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -65,8 +66,8 @@ const Navbar = () => {
 
       {/* Right - Cart & User */}
       <div className="flex items-center gap-6 relative z-10 pr-8">
-        {/* Shopping Cart with Badge */}
-        <div className="relative">
+        {/* Shopping Cart with Badge - Now Clickable */}
+        <div className="relative cursor-pointer" onClick={() => navigate("/cart")}>
           <img src={cartIcon} alt="Cart" className="w-10 h-10" />
           {cartCount > 0 && (
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2">
@@ -86,8 +87,10 @@ const Navbar = () => {
               onClick={() => setDropdownOpen(!dropdownOpen)}
             />
           </div>
+
+          {/* Dropdown - Now Above Navbar */}
           {dropdownOpen && (
-            <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg p-2">
+            <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg p-2 z-50 top-12">
               <button className="block w-full text-left px-3 py-2 hover:bg-gray-100">
                 Login
               </button>
