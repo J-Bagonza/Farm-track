@@ -1,7 +1,17 @@
 import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Bar } from "react-chartjs-2";
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 // Register chart components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -18,79 +28,84 @@ const TrackingPage = () => {
     );
   }
 
-  const rows = Array.from({ length: quantity }, (_, index) => `${resource} ${index + 1}`);
-  const columns = ["", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-  const weeks = Math.ceil(duration / 7);
+  // Generate row labels (Days)
+  const rowLabels = Array.from({ length: duration }, (_, index) => `Day ${index + 1}`);
 
-  const [data, setData] = useState(Array(quantity).fill(Array(duration).fill("")));
+  // Generate column headers (Animals/Crops)
+  const columns = Array.from({ length: quantity }, (_, index) => `${resource} ${index + 1}`);
 
+  // Initialize production data
+  const [data, setData] = useState(Array(duration).fill(Array(quantity).fill("")));
+
+  // Handle input change
   const handleInputChange = (rowIndex, colIndex, value) => {
     const newData = data.map((row, i) =>
       i === rowIndex ? row.map((cell, j) => (j === colIndex ? value : cell)) : row
     );
     setData(newData);
   };
-
   return (
-    <section className="w-[90%] mx-auto py-16">
-      <h2 className="text-2xl font-bold mb-6">Please enter data for {resource}</h2>
+    <>
+      <Navbar />
 
-      {/* Table */}
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse border border-gray-300">
-          <thead>
-            <tr className="bg-gray-200">
-              {columns.map((col, index) => (
-                <th key={index} className="border p-3">{col}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {Array.from({ length: weeks }).map((_, weekIndex) => (
-              <tbody key={weekIndex}>
-                {rows.map((row, rowIndex) => (
-                  <tr key={`${weekIndex}-${rowIndex}`}>
-                    <td className="border p-3 font-bold">{row}</td>
-                    {Array.from({ length: 7 }).map((_, dayIndex) => {
-                      const colIndex = weekIndex * 7 + dayIndex;
-                      return (
-                        <td key={colIndex} className="border p-3">
-                          {colIndex < duration ? (
-                            <input
-                              type="number"
-                              className="w-full p-2 border rounded"
-                              value={data[rowIndex][colIndex] || ""}
-                              onChange={(e) => handleInputChange(rowIndex, colIndex, e.target.value)}
-                            />
-                          ) : null}
-                        </td>
-                      );
-                    })}
-                  </tr>
+      <section className="w-[90%] mx-auto py-32">
+        {/* Title with red vertical line */}
+        <div className="flex items-center mb-6">
+          <div className="w-2 h-10 bg-red-500 mr-4"></div>
+          <h2 className="text-3xl font-extrabold text-orange-400">
+            Tracking {resource} Produce
+          </h2>
+        </div>
+
+        {/* Table */}
+        <div className="overflow-x-auto bg-white p-6 rounded-lg shadow-md">
+          <table className="w-full border-collapse border border-gray-300">
+            <thead>
+              <tr className="bg-green-500 text-white">
+                <th className="border p-3 text-lg">Day</th>
+                {columns.map((col, index) => (
+                  <th key={index} className="border p-3 text-lg">{col}</th>
                 ))}
-                {/* Green separator line */}
-                <tr key={`separator-${weekIndex}`} className="h-2 bg-green-500"></tr>
-              </tbody>
-            ))}
-          </tbody>
-        </table>
-      </div>
+              </tr>
+            </thead>
+            <tbody>
+              {rowLabels.map((day, rowIndex) => (
+                <tr key={rowIndex} className={rowIndex % 2 === 0 ? "bg-gray-100" : "bg-gray-200"}>
+                  <td className="border p-3 font-bold">{day}</td>
+                  {columns.map((_, colIndex) => (
+                    <td key={colIndex} className="border p-3">
+                      <input
+                        type="number"
+                        className="w-full p-2 border rounded text-center"
+                        value={data[rowIndex][colIndex] || ""}
+                        onChange={(e) => handleInputChange(rowIndex, colIndex, e.target.value)}
+                      />
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
 
-      {/* Bar Chart */}
-      <div className="mt-10">
-        <h3 className="text-xl font-bold mb-3">Production Analysis</h3>
-        <Bar
-          data={{
-            labels: Array.from({ length: duration }, (_, i) => `Day ${i + 1}`),
-            datasets: rows.map((row, index) => ({
-              label: row,
-              data: data[index].map((value) => (value ? Number(value) : 0)),
-              backgroundColor: "rgba(75, 192, 192, 0.6)",
-            })),
-          }}
-        />
-      </div>
-    </section>
+        {/* Bar Chart */}
+        <div className="mt-10 p-6 bg-white rounded-lg shadow-md">
+          <h3 className="text-2xl font-bold text-gray-800 mb-3">Production Analysis</h3>
+          <Bar
+            data={{
+              labels: rowLabels,
+              datasets: columns.map((col, index) => ({
+                label: col,
+                data: data.map((row) => (row[index] ? Number(row[index]) : 0)),
+                backgroundColor: "rgba(75, 192, 192, 0.6)",
+              })),
+            }}
+          />
+        </div>
+      </section>
+
+      <Footer />
+    </>
   );
 };
 
