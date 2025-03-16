@@ -1,8 +1,8 @@
-import Navbar from "./components/Navbar";
-import Home from "./components/Home";
-import AboutUs from "./components/AboutUs";
-import ContactUs from "./components/ContactUs";
-import Footer from "./components/Footer";
+import Navbar from "../components/Navbar";
+import Home from "../components/Home";
+import AboutUs from "../components/AboutUs";
+import ContactUs from "../components/ContactUs";
+import Footer from "../components/Footer";
 
 const LandingPage = () => {
   return (

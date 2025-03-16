@@ -1,14 +1,14 @@
-import mainBackground from "../assets/images/mainbackground.png";
+import mainBackground from "/src/assets/images/mainbackground.jpg";
 
 const Home = () => {
   return (
     <section
       id="home"
-      className="relative w-full h-screen flex items-center bg-cover bg-center"
+      className="relative w-[98%] mx-auto h-[86vh] flex items-center bg-cover bg-center rounded-b-[3.8rem]"
       style={{ backgroundImage: `url(${mainBackground}) `}}
     >
       {/* Overlay to improve text visibility */}
-      <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+      <div className="absolute inset-0 bg-black bg-opacity-30 rounded-b-[3.8rem]"></div>
 
       {/* Text Content */}
       <div className="relative z-10 text-left px-10 md:px-20 lg:px-32">
