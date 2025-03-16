@@ -12,14 +12,9 @@
 
 .animate-rotate-border {
   animation: rotate-border 3s linear infinite;
-}
-
-/* Ensuring the border effect is applied */
-.user-icon::before {
-  content: "";
+  border-radius: 50%;
   position: absolute;
   inset: 0;
-  border-radius: 50%;
-  border: 3px solid red; /* Initial border color */
-  animation: rotate-border 3s linear infinite;
+  border-width: 3px;
+  border-style: solid;
 }
