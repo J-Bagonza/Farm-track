@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { FaShoppingBasket, FaUser, FaBars } from "react-icons/fa";
 import { Link } from "react-scroll";
-import logo from "../assets/logo.png";
-import userIcon from "../assets/user.png";
-import cartIcon from "../assets/shoppingbasket.png";
+import logo from "../assets/images/logo.png";
+import userIcon from "../assets/images/user.png";
+import cartIcon from "../assets/images/shoppingbasket.png";
 
 const Navbar = () => {
   const [cartCount, setCartCount] = useState(0);

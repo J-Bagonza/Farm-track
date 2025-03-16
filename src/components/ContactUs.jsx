@@ -1,4 +1,4 @@
-import contactUsLogo from "../assets/contactus.png";
+import contactUsLogo from "../assets/images/contactus.png";
 import { FaUser, FaPhone, FaEnvelope, FaPaperPlane } from "react-icons/fa";
 
 const ContactUs = () => {
