@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { MdOutlineArrowDropDownCircle, MdOutlineArrowDropUpCircle } from "react-icons/md";
+import { MdOutlineArrowDropDownCircle } from "react-icons/md";
+import { IoIosArrowDropup } from "react-icons/io"; 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -32,8 +33,8 @@ const ShoppingPage = () => {
         <h2 className="text-3xl font-bold mb-6 text-orange-500 border-l-4 border-red-500 pl-4">Shop Products</h2>
         <div className="grid grid-cols-4 gap-6">
           {products.map((product) => (
-            <div key={product.id} className="p-4 shadow-md rounded-lg bg-white hover:shadow-lg transition">
-              <img src={product.image} alt={product.name} className="w-full h-40 object-cover" />
+            <div key={product.id} className="p-4 bg-transparent transition">
+              <img src={product.image} alt={product.name} className="w-full h-[220px] object-cover" />
               <h3 className="mt-3 text-lg font-semibold text-gray-800">{product.name}</h3>
               <p className="text-sm text-gray-500">{product.category}</p>
               <div className="flex items-center justify-between mt-2">
@@ -44,13 +45,13 @@ const ShoppingPage = () => {
                     onClick={() => updateQuantity(product.id, -1)}
                   />
                   <span className="text-lg font-semibold">{cart[product.id] || 0}</span>
-                  <MdOutlineArrowDropUpCircle
+                  <IoIosArrowDropup
                     className="text-green-500 text-2xl cursor-pointer"
                     onClick={() => updateQuantity(product.id, 1)}
                   />
                 </div>
               </div>
-              <button className="mt-3 w-full bg-blue-600 text-white py-2 text-center font-semibold uppercase hover:bg-blue-700 transition">
+              <button className="mt-3 w-full border border-black text-black py-2 text-center font-semibold uppercase hover:bg-black hover:text-white transition">
                 View Details
               </button>
             </div>
