@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { FaCaretDown, FaChartBar } from "react-icons/fa";
+import { MdOutlineArrowDropDownCircle } from "react-icons/md";
 import { GoGraph } from "react-icons/go";
 import cowImage from "../assets/images/cow.jpg";
 import chickenImage from "../assets/images/chicken.jpg";
@@ -7,6 +8,7 @@ import goatImage from "../assets/images/goat.jpg";
 import cropImage from "/src/assets/images/crop2.jpg";
 import Navbar from "../components/Navbar"; // Ensure Navbar is correctly imported
 import "../styles/ResourceTracker.css"; // Add styles for animations
+import Footer from "../components/Footer";
 
 const resourceOptions = [
   { name: "Cows", image: cowImage },
@@ -31,17 +33,19 @@ const ResourceTracker = () => {
         <div className="bg-gray-200 rounded-xl p-8 shadow-md">
           {/* Header and Graph Section */}
           <div className="flex flex-col md:flex-row items-center justify-between mb-10">
-            {/* Text Content */}
-            <div className="flex-1">
-              <h1 className="text-3xl font-extrabold text-gray-800">
-                Welcome to the Resource Tracker!
-              </h1>
-              <h2 className="text-2xl font-bold text-red-500">Here to maximize</h2>
-              <h2 className="text-2xl font-bold text-green-500">your produce</h2>
+            {/* Text Content with Vertical Red Line */}
+            <div className="flex-1 pl-10 md:pl-16 lg:pl-24">
+              <div className="border-l-4 border-red-500 pl-4">
+                <h1 className="text-3xl font-extrabold text-gray-800">
+                  Welcome to the Resource Tracker!
+                </h1>
+                <h2 className="text-2xl font-bold text-red-500">Here to maximize</h2>
+                <h2 className="text-2xl font-bold text-green-500">your produce</h2>
+              </div>
             </div>
 
-            {/* Animated Chart Bar */}
-            <div className="flex items-center justify-center w-56 h-56">
+            {/* Animated Chart Bar, moved away from the right side */}
+            <div className="flex items-center justify-center w-56 h-56 pr-10 md:pr-16 lg:pr-32">
               <FaChartBar className="text-blue-500 text-9xl animate-pulse" />
             </div>
           </div>
@@ -66,7 +70,7 @@ const ResourceTracker = () => {
                 ) : (
                   <span className="text-gray-500">Select Resource</span>
                 )}
-                <FaCaretDown className="text-gray-600" />
+                <MdOutlineArrowDropDownCircle className="text-gray-600" />
               </div>
 
               {/* Dropdown Menu */}
@@ -123,6 +127,8 @@ const ResourceTracker = () => {
           </form>
         </div>
       </section>
+      {/* Footer - Stays at the bottom */}
+      <Footer />
     </>
   );
 };
