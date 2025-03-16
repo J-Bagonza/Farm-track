@@ -10,6 +10,6 @@
   }
 }
 
-.before\\:animate-rotate-border::before {
+.animate-rotate-border {
   animation: rotate-border 3s linear infinite;
 }

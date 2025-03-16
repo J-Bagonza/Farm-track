@@ -33,7 +33,7 @@ const Navbar = ({ cartCount }) => {
   }, [location]);
 
   return (
-    <nav className="flex justify-between items-center bg-white shadow-md w-[85%] mx-auto mt-4 py-3 px-6 rounded-full fixed top-0 left-1/2 transform -translate-x-1/2 z-50">
+    <nav className="flex justify-between items-center bg-white shadow-md w-[85%] mx-auto mt-4 py-2 px-6 rounded-full fixed top-0 left-1/2 transform -translate-x-1/2 z-50">
       {/* Left - Logo */}
       <div className="flex items-center gap-2 relative z-10">
         <img src={logo} alt="Farm-Track Logo" className="w-10 h-10" />
@@ -71,7 +71,7 @@ const Navbar = ({ cartCount }) => {
         {/* User Icon with Animated Rotating Border */}
         <div className="relative">
           <div
-            className="relative w-12 h-12 flex items-center justify-center cursor-pointer rounded-full border-[3px] border-transparent"
+            className="relative w-12 h-12 flex items-center justify-center cursor-pointer rounded-full border-[3px] border-transparent user-icon"
             onClick={() => setDropdownOpen(!dropdownOpen)}
           >
             {/* Border Effect */}
