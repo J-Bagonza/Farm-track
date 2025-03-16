@@ -36,7 +36,7 @@ const ShoppingPage = () => {
         <h2 className="text-3xl font-bold mb-6 text-orange-500 border-l-4 border-red-500 pl-4">Shop Products</h2>
         <div className="grid grid-cols-4 gap-6">
           {products.map((product) => (
-            <div key={product.id} className="p-4 bg-transparent transition shadow-sm rounded-lg">
+            <div key={product.id} className="p-4">
               <img src={product.image} alt={product.name} className="w-full h-[220px] object-cover rounded-md" />
               <h3 className="mt-3 text-lg font-semibold text-gray-800">{product.name}</h3>
               <p className="text-sm text-gray-500">{product.category}</p>
@@ -54,7 +54,7 @@ const ShoppingPage = () => {
                   />
                 </div>
               </div>
-              <button className="mt-3 w-full border border-black text-black py-2 text-center font-semibold uppercase hover:bg-black hover:text-white transition">
+              <button className="mt-3 w-full text-black py-2 text-center font-semibold uppercase hover:bg-black hover:text-white transition">
                 View Details
               </button>
             </div>
