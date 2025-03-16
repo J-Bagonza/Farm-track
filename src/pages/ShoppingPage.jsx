@@ -54,7 +54,7 @@ const ShoppingPage = () => {
                   />
                 </div>
               </div>
-              <button className="mt-3 w-full text-black py-2 text-center font-semibold uppercase hover:bg-black hover:text-white transition">
+              <button className="mt-3 w-full border border-black text-black py-2 text-center font-semibold uppercase hover:bg-black hover:text-white transition">
                 View Details
               </button>
             </div>
