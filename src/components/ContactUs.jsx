@@ -33,31 +33,29 @@ const ContactUs = () => {
 
         {/* Contact Form */}
         <form className="w-full max-w-lg">
-          <div className="flex items-center border rounded-lg overflow-hidden mb-4">
-            <span className="bg-gray-200 p-3">
+          <div className="flex  border rounded-lg overflow-hidden mb-4 h-12">
+            <span className="bg-orange-300 w-12 h-full flex items-center justify-center">
               <FaUser className="text-gray-600" />
             </span>
             <input type="text" placeholder="Full Name" className="w-full p-3 focus:outline-none" />
           </div>
 
-          <div className="flex items-center border rounded-lg overflow-hidden mb-4">
-            <span className="bg-gray-200 p-3">
+          <div className="flex  border rounded-lg overflow-hidden mb-4 h-12">
+            <span className="bg-red-300 w-12 h-full flex items-center justify-center">
               <FaPhone className="text-gray-600" />
             </span>
             <input type="tel" placeholder="Phone Number" className="w-full p-3 focus:outline-none" />
           </div>
 
-          <div className="flex items-center border rounded-lg overflow-hidden mb-4">
-            <span className="bg-gray-200 p-3">
-              <FaEnvelope className="text-gray-600" />
+          <div className="flex border rounded-lg overflow-hidden mb-4 h-12">
+             <span className="bg-green-300 w-12 h-full flex items-center justify-center">
+                <FaEnvelope className="text-white text-lg" />
             </span>
             <input type="email" placeholder="Email Address" className="w-full p-3 focus:outline-none" />
-          </div>
+         </div>
 
           <div className="flex items-start border rounded-lg overflow-hidden mb-4">
-            <span className="bg-gray-200 p-3">
-              <FaEnvelope className="text-gray-600" />
-            </span>
+            
             <textarea placeholder="Your Message" className="w-full p-3 focus:outline-none resize-none h-32"></textarea>
           </div>
 
