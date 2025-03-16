@@ -68,14 +68,14 @@ const Navbar = ({ cartCount }) => {
           )}
         </div>
 
-        {/* User Icon with Dropdown */}
+        {/* User Icon with Rotating Border */}
         <div className="relative">
-          {/* User Icon with Animated Border */}
           <div
             className="relative w-10 h-10 flex items-center justify-center cursor-pointer"
             onClick={() => setDropdownOpen(!dropdownOpen)}
           >
-            <div className="absolute inset-0 border-2 border-transparent rounded-full animate-rotate-border"></div>
+            {/* Animated Rotating Border */}
+            <div className="absolute inset-0 border-2 border-green-500 rounded-full animate-spin-slow"></div>
             <img src={userIcon} alt="User" className="w-8 h-8 z-10" />
           </div>
 
