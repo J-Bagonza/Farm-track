@@ -36,7 +36,7 @@ const ShoppingPage = () => {
         <h2 className="text-3xl font-bold mb-6 text-orange-500 border-l-4 border-red-500 pl-4">Shop Products</h2>
         <div className="grid grid-cols-4 gap-6">
           {products.map((product) => (
-            <div key={product.id} className="p-4 bg-transparent transition border border-gray-200 rounded-lg shadow-sm">
+            <div key={product.id} className="p-4 bg-transparent transition shadow-sm rounded-lg">
               <img src={product.image} alt={product.name} className="w-full h-[220px] object-cover rounded-md" />
               <h3 className="mt-3 text-lg font-semibold text-gray-800">{product.name}</h3>
               <p className="text-sm text-gray-500">{product.category}</p>
