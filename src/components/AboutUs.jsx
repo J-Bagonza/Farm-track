@@ -1,4 +1,4 @@
-import aboutUsLogo from "../assets/aboutus.png";
+import aboutUsLogo from "../assets/images/aboutus.png";
 
 const AboutUs = () => {
   return (
