@@ -48,7 +48,7 @@ const Navbar = ({ cartCount }) => {
       {/* Left - Logo */}
       <div className="flex items-center gap-2">
         <img src={logo} alt="Farm-Track Logo" className="w-7 h-6" />
-        <h1 className="text-xl font-bold text-gray-700">Farm-Track</h1>
+        <h1 className="text-lg md:text-xl font-bold text-gray-700">Farm-Track</h1>
       </div>
 
       {/* Center - Desktop Navigation */}
