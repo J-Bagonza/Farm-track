@@ -39,7 +39,7 @@ const Navbar = ({ cartCount }) => {
     <nav className="flex justify-between items-center bg-white shadow-md w-[90%] md:w-[75%] mx-auto mt-4 py-2 px-6 rounded-full fixed top-0 left-1/2 transform -translate-x-1/2 z-50">
       {/* Left - Logo */}
       <div className="flex items-center gap-2">
-        <img src={logo} alt="Farm-Track Logo" className="w-8 h-8" />
+        <img src={logo} alt="Farm-Track Logo" className="w-6 h-5" />
         <h1 className="text-xl font-bold text-gray-700">Farm-Track</h1>
       </div>
 
