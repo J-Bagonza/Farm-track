@@ -13,27 +13,35 @@ const Navbar = ({ cartCount }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Close user dropdown when clicking outside
   useEffect(() => {
     const closeDropdown = (e) => {
-      if (!e.target.closest(".user-menu")) {
-        setUserDropdownOpen(false);
-      }
+      if (!e.target.closest(".user-menu")) setUserDropdownOpen(false);
     };
     document.addEventListener("click", closeDropdown);
     return () => document.removeEventListener("click", closeDropdown);
   }, []);
 
+  // Disable scrolling when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "auto";
+  }, [mobileMenuOpen]);
+
   const handleNavClick = (id) => {
     setMobileMenuOpen(false);
     if (location.pathname === "/") {
       const section = document.getElementById(id);
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth" });
-      }
+      if (section) section.scrollIntoView({ behavior: "smooth" });
     } else {
       navigate("/", { state: { scrollTo: id } });
     }
   };
+
+  const navLinks = [
+    { id: "home", label: "Home", icon: <RiHome3Line className="text-2xl text-orange-500" /> },
+    { id: "about", label: "About Us", icon: <MdInfoOutline className="text-2xl text-orange-500" /> },
+    { id: "contact", label: "Contact", icon: <RiContactsLine className="text-2xl text-orange-500" /> },
+  ];
 
   return (
     <nav className="flex justify-between items-center bg-white shadow-md w-[90%] md:w-[75%] mx-auto mt-4 py-2 px-6 rounded-full fixed top-0 left-1/2 transform -translate-x-1/2 z-50">
@@ -43,19 +51,19 @@ const Navbar = ({ cartCount }) => {
         <h1 className="text-xl font-bold text-gray-700">Farm-Track</h1>
       </div>
 
-      {/* Center - Navigation Links (Hidden on Mobile) */}
+      {/* Center - Desktop Navigation */}
       <div className="hidden md:flex gap-10">
-        {["home", "about", "contact"].map((id, index) => (
-          <button key={index} onClick={() => handleNavClick(id)} className="hover:text-green-600 relative">
-            {id.charAt(0).toUpperCase() + id.slice(1)}
+        {navLinks.map(({ id, label }) => (
+          <button key={id} onClick={() => handleNavClick(id)} className="hover:text-green-600 relative">
+            {label}
             <span className="absolute bottom-0 left-0 w-full h-1 bg-green-500 scale-x-0 transition-transform hover:scale-x-100"></span>
           </button>
         ))}
       </div>
 
-      {/* Right - Shopping Cart & User Icon */}
+      {/* Right - Cart & User */}
       <div className="flex items-center gap-6">
-        {/* Shopping Cart */}
+        {/* Cart Icon */}
         <div className="relative cursor-pointer" onClick={() => navigate("/cart")}>
           <img src={cartIcon} alt="Cart" className="w-10 h-10" />
           {cartCount > 0 && (
@@ -65,7 +73,7 @@ const Navbar = ({ cartCount }) => {
           )}
         </div>
 
-        {/* User Dropdown (Medium & Large Screens) */}
+        {/* User Dropdown (Desktop) */}
         <div className="relative hidden md:block user-menu">
           <img
             src={userIcon}
@@ -91,7 +99,7 @@ const Navbar = ({ cartCount }) => {
           )}
         </div>
 
-        {/* Mobile Menu Icon */}
+        {/* Mobile Menu Button */}
         <div className="md:hidden">
           <HiMenuAlt3 className="text-3xl cursor-pointer" onClick={() => setMobileMenuOpen(true)} />
         </div>
@@ -99,54 +107,41 @@ const Navbar = ({ cartCount }) => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <>
-          {/* Overlay */}
-          <div
-            className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-40"
-            onClick={() => setMobileMenuOpen(false)}
-          ></div>
-
-          {/* Menu Panel */}
-          <div className="fixed top-0 right-0 h-full w-1/2 bg-white z-50 shadow-lg transform transition-transform translate-x-0 flex flex-col">
-            {/* Close Button */}
-            <div className="flex justify-between items-center p-6">
-              <h2 className="text-lg font-bold text-gray-700">Menu</h2>
-              <MdClose className="text-2xl cursor-pointer" onClick={() => setMobileMenuOpen(false)} />
-            </div>
-
-            {/* Navigation Links */}
-            <div className="mt-8 space-y-4 px-6">
-              {[
-                { id: "home", label: "Home", icon: <RiHome3Line className="text-2xl text-green-500" /> },
-                { id: "about", label: "About Us", icon: <MdInfoOutline className="text-2xl text-blue-500" /> },
-                { id: "contact", label: "Contact", icon: <RiContactsLine className="text-2xl text-orange-500" /> },
-              ].map(({ id, label, icon }, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleNavClick(id)}
-                  className="flex items-center gap-3 w-full text-left text-gray-700 text-lg py-3 border-b hover:text-green-600"
-                >
-                  {icon} {label}
-                </button>
-              ))}
-            </div>
-
-            {/* User Icon & Buttons - At the Bottom */}
-            <div className="mt-auto pb-10 px-6 flex flex-col items-center">
-              <img src={userIcon} alt="User" className="w-14 h-14 rounded-full border-2 border-gray-400 mb-4" />
-              <Link to="/signup" className="w-full">
-                <button className="w-full py-2 border border-black text-black bg-white font-semibold rounded-lg hover:bg-gray-100">
-                  Signup
-                </button>
-              </Link>
-              <Link to="/login" className="w-full mt-3">
-                <button className="w-full py-2 border border-black text-black bg-white font-semibold rounded-lg hover:bg-gray-100">
-                  Login
-                </button>
-              </Link>
-            </div>
+        <div className="fixed inset-0 bg-gray-900 bg-opacity-90 z-50 flex flex-col h-screen transition-opacity duration-300">
+          {/* Close Button */}
+          <div className="flex justify-between items-center p-6">
+            <h2 className="text-lg font-bold text-white">Menu</h2>
+            <MdClose className="text-2xl text-white cursor-pointer" onClick={() => setMobileMenuOpen(false)} />
           </div>
-        </>
+
+          {/* Navigation Links */}
+          <div className="mt-8 space-y-4 px-6">
+            {navLinks.map(({ id, label, icon }) => (
+              <button
+                key={id}
+                onClick={() => handleNavClick(id)}
+                className="flex items-center gap-3 w-full text-left text-orange-500 text-lg py-3 border-b border-orange-500"
+              >
+                {icon} {label}
+              </button>
+            ))}
+          </div>
+
+          {/* User Section at Bottom */}
+          <div className="mt-auto pb-10 px-6 flex flex-col items-center">
+            <img src={userIcon} alt="User" className="w-14 h-14 rounded-full border-2 border-orange-500 mb-4" />
+            <Link to="/signup" className="w-full">
+              <button className="w-full py-2 border border-orange-500 text-orange-500 bg-transparent font-semibold rounded-lg hover:bg-orange-500 hover:text-white transition">
+                Signup
+              </button>
+            </Link>
+            <Link to="/login" className="w-full mt-3">
+              <button className="w-full py-2 border border-orange-500 text-orange-500 bg-transparent font-semibold rounded-lg hover:bg-orange-500 hover:text-white transition">
+                Login
+              </button>
+            </Link>
+          </div>
+        </div>
       )}
     </nav>
   );
