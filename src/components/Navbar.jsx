@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { MdClose } from "react-icons/md"; // Close icon
+import { MdClose } from "react-icons/md";
+import { HiMenuAlt3 } from "react-icons/hi"; // Hamburger menu icon
 import logo from "../assets/images/logo.png";
 import userIcon from "../assets/images/user.png";
 import cartIcon from "../assets/images/shoppingbasket.png";
 
 const Navbar = ({ cartCount }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Scroll to section if on the landing page
   const handleNavClick = (id) => {
+    setMobileMenuOpen(false); // Close mobile menu when navigating
     if (location.pathname === "/") {
       const section = document.getElementById(id);
       if (section) {
@@ -22,7 +24,6 @@ const Navbar = ({ cartCount }) => {
     }
   };
 
-  // Listen for location changes and scroll if needed
   useEffect(() => {
     if (location.state?.scrollTo) {
       const section = document.getElementById(location.state.scrollTo);
@@ -40,8 +41,8 @@ const Navbar = ({ cartCount }) => {
         <h1 className="text-xl font-bold text-gray-700">Farm-Track</h1>
       </div>
 
-      {/* Center - Navigation Links */}
-      <div className="flex gap-10 relative z-10">
+      {/* Center - Navigation Links (Hidden on Mobile) */}
+      <div className="hidden md:flex gap-10 relative z-10">
         <button onClick={() => handleNavClick("home")} className="cursor-pointer hover:text-green-600 relative">
           Home
           <span className="absolute bottom-0 left-0 w-full h-1 bg-green-500 scale-x-0 transition-transform hover:scale-x-100"></span>
@@ -56,7 +57,7 @@ const Navbar = ({ cartCount }) => {
         </button>
       </div>
 
-      {/* Right - Cart & User */}
+      {/* Right - Shopping Cart & Mobile Menu Icon */}
       <div className="flex items-center gap-6 relative z-10 pr-8">
         {/* Shopping Cart */}
         <div className="relative cursor-pointer" onClick={() => navigate("/cart")}>
@@ -68,33 +69,59 @@ const Navbar = ({ cartCount }) => {
           )}
         </div>
 
-        {/* User Icon with Animated Rotating Border */}
-        <div className="relative">
-          <div
-            className="relative w-12 h-12 flex items-center justify-center cursor-pointer rounded-full border-[3px] border-transparent user-icon"
-            onClick={() => setDropdownOpen(!dropdownOpen)}
-          >
-            {/* Border Effect */}
-            <div className="absolute inset-0 rounded-full border-[3px] animate-rotate-border"></div>
-            <img src={userIcon} alt="User" className="w-8 h-8 z-10" />
-          </div>
+        {/* Mobile Menu Icon */}
+        <HiMenuAlt3
+          className="md:hidden text-3xl cursor-pointer"
+          onClick={() => setMobileMenuOpen(true)}
+        />
+      </div>
 
-          {/* Dropdown Menu */}
-          {dropdownOpen && (
-            <div className="absolute right-0 mt-3 w-44 bg-white shadow-lg rounded-lg p-2 z-50 transition-all duration-200 ease-in-out animate-fadeIn">
-              {/* Close Button */}
-              <div className="flex justify-between items-center px-3 py-2">
-                <span className="text-gray-700 font-semibold">Account</span>
-                <MdClose
-                  className="text-gray-500 cursor-pointer hover:text-red-500"
-                  size={20}
-                  onClick={() => setDropdownOpen(false)}
-                />
-              </div>
-              <button className="block w-full text-left px-3 py-2 hover:bg-gray-100">Login</button>
-              <button className="block w-full text-left px-3 py-2 hover:bg-gray-100">Signup</button>
-            </div>
-          )}
+      {/* Mobile Menu (Slides in from Left) */}
+      <div
+        className={`fixed top-0 left-0 h-full w-[75%] bg-white shadow-lg transform ${
+          mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+        } transition-transform duration-300 ease-in-out z-50 p-6`}
+      >
+        {/* Close Button */}
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-lg font-bold text-gray-700">Menu</h2>
+          <MdClose className="text-2xl cursor-pointer" onClick={() => setMobileMenuOpen(false)} />
+        </div>
+
+        {/* Navigation Links */}
+        <button
+          onClick={() => handleNavClick("home")}
+          className="block w-full text-left text-gray-700 text-lg py-3 border-b hover:text-green-600"
+        >
+          Home
+        </button>
+        <button
+          onClick={() => handleNavClick("about")}
+          className="block w-full text-left text-gray-700 text-lg py-3 border-b hover:text-green-600"
+        >
+          About Us
+        </button>
+        <button
+          onClick={() => handleNavClick("contact")}
+          className="block w-full text-left text-gray-700 text-lg py-3 border-b hover:text-green-600"
+        >
+          Contact
+        </button>
+
+        {/* User Icon */}
+        <div className="flex flex-col items-center mt-6">
+          <img src={userIcon} alt="User" className="w-12 h-12 rounded-full border-2 border-gray-400 mb-4" />
+          {/* Signup & Login Buttons */}
+          <Link to="/signup" className="w-full">
+            <button className="w-full py-2 border border-black text-black bg-white font-semibold rounded-lg hover:bg-gray-100">
+              Signup
+            </button>
+          </Link>
+          <Link to="/login" className="w-full mt-3">
+            <button className="w-full py-2 border border-black text-black bg-white font-semibold rounded-lg hover:bg-gray-100">
+              Login
+            </button>
+          </Link>
         </div>
       </div>
     </nav>
