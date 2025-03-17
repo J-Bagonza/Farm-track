@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <section
       id="home"
-      className="relative w-[98%] mx-auto h-[82vh] md:h-[86vh] flex items-center bg-cover bg-center rounded-b-[2rem] md:rounded-b-[3.8rem]"
+      className="relative w-[95%] mx-auto h-[82vh] md:h-[86vh] flex items-center bg-cover bg-center rounded-b-[2rem] md:rounded-b-[3.8rem]"
       style={{ backgroundImage: `url(${mainBackground}) `}}
     >
       {/* Overlay for better text visibility */}
