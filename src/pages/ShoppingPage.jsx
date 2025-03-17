@@ -55,7 +55,7 @@ const ShoppingPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="p-3 bg-white shadow-md rounded-lg hover:shadow-lg transition"
+              className="p-3 rounded-lg" // Removed shadow and background color
             >
               <img 
                 src={product.image} 
