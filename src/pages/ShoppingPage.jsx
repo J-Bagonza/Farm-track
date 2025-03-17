@@ -39,7 +39,7 @@ const ShoppingPage = () => {
         {/* Title & Subtitle (Left-Aligned with Vertical Border) */}
         <div className="mb-10">
           <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-orange-500 border-l-4 border-red-500 pl-4">
-            Shop Products
+            Welcome to our shop
           </h1>
           <h2 className="text-sm sm:text-base md:text-lg lg:text-xl text-blue-400 pl-4 mt-1">
             Contact Sales for Inquiries
