@@ -35,12 +35,12 @@ const ShoppingPage = () => {
       <Navbar cartCount={cartCount} />
       <div className="w-[90%] mx-auto py-16">
         
-        {/* Title & Subtitle */}
-        <div className="text-center mb-8">
-          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-green-500">
-            Welcome to Our Shop
+        {/* Title & Subtitle (Left-Aligned with Vertical Border) */}
+        <div className="mb-8">
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-orange-500 border-l-4 border-red-500 pl-4">
+            Shop Products
           </h1>
-          <h2 className="text-sm sm:text-base md:text-lg lg:text-xl text-blue-400 mt-1">
+          <h2 className="text-sm sm:text-base md:text-lg lg:text-xl text-blue-400 pl-4 mt-1">
             Contact Sales for Inquiries
           </h2>
         </div>
