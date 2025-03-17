@@ -25,7 +25,7 @@ const Home = () => {
         <h3 className="text-lg md:text-2xl font-medium text-orange-300">
           To get the best out of
         </h3>
-        <h3 className="text-xl md:text-3xl font-bold text-green-900">
+        <h3 className="text-xl md:text-3xl font-bold text-orange-600">
           their resources
         </h3>
 
