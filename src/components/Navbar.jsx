@@ -76,42 +76,43 @@ const Navbar = ({ cartCount }) => {
         />
       </div>
 
-      {/* Mobile Menu (Slides in from Left) */}
+      {/* Mobile Menu (Slides in from Right to Left) */}
       <div
-        className={`fixed top-0 left-0 h-full w-[75%] bg-white shadow-lg transform ${
-          mobileMenuOpen ? "translate-x-0" : "-translate-x-full"
-        } transition-transform duration-300 ease-in-out z-50 p-6`}
+        className={`fixed top-0 right-0 h-full w-[75%] bg-white shadow-lg transform ${
+          mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+        } transition-transform duration-300 ease-in-out z-50 p-6 flex flex-col justify-between`}
       >
         {/* Close Button */}
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex justify-between items-center">
           <h2 className="text-lg font-bold text-gray-700">Menu</h2>
           <MdClose className="text-2xl cursor-pointer" onClick={() => setMobileMenuOpen(false)} />
         </div>
 
         {/* Navigation Links */}
-        <button
-          onClick={() => handleNavClick("home")}
-          className="block w-full text-left text-gray-700 text-lg py-3 border-b hover:text-green-600"
-        >
-          Home
-        </button>
-        <button
-          onClick={() => handleNavClick("about")}
-          className="block w-full text-left text-gray-700 text-lg py-3 border-b hover:text-green-600"
-        >
-          About Us
-        </button>
-        <button
-          onClick={() => handleNavClick("contact")}
-          className="block w-full text-left text-gray-700 text-lg py-3 border-b hover:text-green-600"
-        >
-          Contact
-        </button>
+        <div className="mt-8">
+          <button
+            onClick={() => handleNavClick("home")}
+            className="block w-full text-left text-gray-700 text-lg py-3 border-b hover:text-green-600"
+          >
+            Home
+          </button>
+          <button
+            onClick={() => handleNavClick("about")}
+            className="block w-full text-left text-gray-700 text-lg py-3 border-b hover:text-green-600"
+          >
+            About Us
+          </button>
+          <button
+            onClick={() => handleNavClick("contact")}
+            className="block w-full text-left text-gray-700 text-lg py-3 border-b hover:text-green-600"
+          >
+            Contact
+          </button>
+        </div>
 
-        {/* User Icon */}
-        <div className="flex flex-col items-center mt-6">
+        {/* User Icon & Authentication Buttons (Near Bottom) */}
+        <div className="mb-10 flex flex-col items-center">
           <img src={userIcon} alt="User" className="w-12 h-12 rounded-full border-2 border-gray-400 mb-4" />
-          {/* Signup & Login Buttons */}
           <Link to="/signup" className="w-full">
             <button className="w-full py-2 border border-black text-black bg-white font-semibold rounded-lg hover:bg-gray-100">
               Signup
