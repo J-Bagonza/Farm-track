@@ -34,27 +34,35 @@ const ShoppingPage = () => {
       <Navbar cartCount={cartCount} />
       <div className="w-[90%] mx-auto py-24">
         <h2 className="text-3xl font-bold mb-6 text-orange-500 border-l-4 border-red-500 pl-4">Shop Products</h2>
-        <div className="grid grid-cols-4 gap-6">
+
+        {/* Responsive Grid - 2 Columns for Small Screens, 4 for Larger Screens */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-6">
           {products.map((product) => (
-            <div key={product.id} className="p-4">
-              <img src={product.image} alt={product.name} className="w-full h-[220px] object-cover rounded-md" />
-              <h3 className="mt-3 text-lg font-semibold text-gray-800">{product.name}</h3>
-              <p className="text-sm text-gray-500">{product.category}</p>
-              <div className="flex items-center justify-between mt-2">
-                <span className="text-lg font-bold text-green-600">Ksh {product.price}</span>
-                <div className="flex items-center gap-2">
+            <div key={product.id} className="p-2 md:p-4 bg-transparent">
+              <img 
+                src={product.image} 
+                alt={product.name} 
+                className="w-full h-[140px] md:h-[220px] object-cover rounded-md"
+              />
+              <h3 className="mt-2 text-sm md:text-lg font-semibold text-gray-800">{product.name}</h3>
+              <p className="text-xs md:text-sm text-gray-500">{product.category}</p>
+
+              <div className="flex items-center justify-between mt-1 md:mt-2">
+                <span className="text-sm md:text-lg font-bold text-green-600">Ksh {product.price}</span>
+                <div className="flex items-center gap-1 md:gap-2">
                   <MdOutlineArrowDropDownCircle
-                    className="text-red-500 text-2xl cursor-pointer hover:text-red-700"
+                    className="text-red-500 text-lg md:text-2xl cursor-pointer hover:text-red-700"
                     onClick={() => updateQuantity(product.id, -1)}
                   />
-                  <span className="text-lg font-semibold w-6 text-center">{cart[product.id] || 0}</span>
+                  <span className="text-sm md:text-lg font-semibold w-5 text-center">{cart[product.id] || 0}</span>
                   <IoIosArrowDropup
-                    className="text-green-500 text-2xl cursor-pointer hover:text-green-700"
+                    className="text-green-500 text-lg md:text-2xl cursor-pointer hover:text-green-700"
                     onClick={() => updateQuantity(product.id, 1)}
                   />
                 </div>
               </div>
-              <button className="mt-3 w-full border border-black text-black py-2 text-center font-semibold uppercase hover:bg-black hover:text-white transition">
+
+              <button className="mt-2 w-full border border-black text-black py-1 md:py-2 text-center text-xs md:text-base font-semibold uppercase hover:bg-black hover:text-white transition">
                 View Details
               </button>
             </div>
