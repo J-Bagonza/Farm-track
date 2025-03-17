@@ -38,9 +38,9 @@ const Navbar = ({ cartCount }) => {
   };
 
   const navLinks = [
-    { id: "home", label: "Home", icon: <RiHome3Line className="text-2xl text-orange-500" /> },
-    { id: "about", label: "About Us", icon: <MdInfoOutline className="text-2xl text-orange-500" /> },
-    { id: "contact", label: "Contact", icon: <RiContactsLine className="text-2xl text-orange-500" /> },
+    { id: "home", label: "Home", icon: <RiHome3Line className="text-2xl text-green-400" /> },
+    { id: "about", label: "About Us", icon: <MdInfoOutline className="text-2xl text-blue-400" /> },
+    { id: "contact", label: "Contact", icon: <RiContactsLine className="text-2xl text-orange-400" /> },
   ];
 
   return (
@@ -107,7 +107,7 @@ const Navbar = ({ cartCount }) => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 bg-gray-900 bg-opacity-90 z-50 flex flex-col h-screen transition-opacity duration-300">
+        <div className="fixed top-0 right-0 h-screen w-5/6 md:w-2/5 bg-gray-900 bg-opacity-90 z-50 flex flex-col">
           {/* Close Button */}
           <div className="flex justify-between items-center p-6">
             <h2 className="text-lg font-bold text-white">Menu</h2>
@@ -120,7 +120,7 @@ const Navbar = ({ cartCount }) => {
               <button
                 key={id}
                 onClick={() => handleNavClick(id)}
-                className="flex items-center gap-3 w-full text-left text-orange-500 text-lg py-3 border-b border-orange-500"
+                className="flex items-center gap-3 w-full text-left text-white text-lg py-3 border-b border-gray-500"
               >
                 {icon} {label}
               </button>
@@ -129,14 +129,14 @@ const Navbar = ({ cartCount }) => {
 
           {/* User Section at Bottom */}
           <div className="mt-auto pb-10 px-6 flex flex-col items-center">
-            <img src={userIcon} alt="User" className="w-14 h-14 rounded-full border-2 border-orange-500 mb-4" />
+            <img src={userIcon} alt="User" className="w-14 h-14 rounded-full border-2 border-white mb-4" />
             <Link to="/signup" className="w-full">
-              <button className="w-full py-2 border border-orange-500 text-orange-500 bg-transparent font-semibold rounded-lg hover:bg-orange-500 hover:text-white transition">
+              <button className="w-full py-2 border border-white text-white bg-transparent font-semibold rounded-lg hover:bg-white hover:text-gray-900 transition">
                 Signup
               </button>
             </Link>
             <Link to="/login" className="w-full mt-3">
-              <button className="w-full py-2 border border-orange-500 text-orange-500 bg-transparent font-semibold rounded-lg hover:bg-orange-500 hover:text-white transition">
+              <button className="w-full py-2 border border-white text-white bg-transparent font-semibold rounded-lg hover:bg-white hover:text-gray-900 transition">
                 Login
               </button>
             </Link>
