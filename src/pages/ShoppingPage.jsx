@@ -33,10 +33,11 @@ const ShoppingPage = () => {
   return (
     <>
       <Navbar cartCount={cartCount} />
-      <div className="w-[90%] mx-auto py-16">
+      <div className="w-[90%] mx-auto mt-24 md:mt-32 lg:mt-40"> 
+        {/* Increased margin-top for more spacing */}
         
         {/* Title & Subtitle (Left-Aligned with Vertical Border) */}
-        <div className="mb-8">
+        <div className="mb-10">
           <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-orange-500 border-l-4 border-red-500 pl-4">
             Shop Products
           </h1>
@@ -46,7 +47,7 @@ const ShoppingPage = () => {
         </div>
 
         {/* Product Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {products.map((product, index) => (
             <motion.div
               key={product.id}
