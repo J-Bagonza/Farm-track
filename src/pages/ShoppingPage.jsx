@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion"; 
 import { MdOutlineArrowDropDownCircle } from "react-icons/md";
 import { IoIosArrowDropup } from "react-icons/io"; 
 import Navbar from "../components/Navbar";
@@ -37,8 +38,15 @@ const ShoppingPage = () => {
 
         {/* Responsive Grid - 2 Columns for Small Screens, 4 for Larger Screens */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-6">
-          {products.map((product) => (
-            <div key={product.id} className="p-2 md:p-4 bg-transparent">
+          {products.map((product, index) => (
+            <motion.div
+              key={product.id}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              className="p-2 md:p-4 bg-transparent"
+            >
               <img 
                 src={product.image} 
                 alt={product.name} 
@@ -65,7 +73,7 @@ const ShoppingPage = () => {
               <button className="mt-2 w-full border border-black text-black py-1 md:py-2 text-center text-xs md:text-base font-semibold uppercase hover:bg-black hover:text-white transition">
                 View Details
               </button>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
