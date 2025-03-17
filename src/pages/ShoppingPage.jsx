@@ -33,8 +33,8 @@ const ShoppingPage = () => {
   return (
     <>
       <Navbar cartCount={cartCount} />
-      <div className="w-[90%] mx-auto mt-24 md:mt-32 lg:mt-40"> 
-        {/* Increased margin-top for more spacing */}
+      <div className="w-[90%] mx-auto mt-24 md:mt-32 lg:mt-40 mb-32"> 
+        {/* Increased bottom margin (mb-32) to create space above the footer */}
         
         {/* Title & Subtitle (Left-Aligned with Vertical Border) */}
         <div className="mb-10">
@@ -55,7 +55,7 @@ const ShoppingPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="p-3 rounded-lg" // Removed shadow and background color
+              className="p-3 rounded-lg" // No shadow or background color
             >
               <img 
                 src={product.image} 
