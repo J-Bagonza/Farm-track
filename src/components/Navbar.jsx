@@ -107,28 +107,15 @@ const Navbar = ({ cartCount }) => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="fixed top-0 right-0 h-screen w-5/6 md:w-2/5 bg-gray-900 bg-opacity-90 z-50 flex flex-col">
+        <div className="fixed top-0 right-0 h-screen w-5/6 md:w-2/5 bg-gray-900 bg-opacity-90 z-50 flex flex-col overflow-y-auto">
           {/* Close Button */}
           <div className="flex justify-between items-center p-6">
             <h2 className="text-lg font-bold text-white">Menu</h2>
             <MdClose className="text-2xl text-white cursor-pointer" onClick={() => setMobileMenuOpen(false)} />
           </div>
 
-          {/* Navigation Links */}
-          <div className="mt-8 space-y-4 px-6">
-            {navLinks.map(({ id, label, icon }) => (
-              <button
-                key={id}
-                onClick={() => handleNavClick(id)}
-                className="flex items-center gap-3 w-full text-left text-white text-lg py-3 border-b border-gray-500"
-              >
-                {icon} {label}
-              </button>
-            ))}
-          </div>
-
-          {/* User Section at Bottom */}
-          <div className="mt-auto pb-10 px-6 flex flex-col items-center">
+          {/* User Section */}
+          <div className="px-6 pb-4 flex flex-col items-center">
             <img src={userIcon} alt="User" className="w-14 h-14 rounded-full border-2 border-white mb-4" />
             <Link to="/signup" className="w-full">
               <button className="w-full py-2 border border-white text-white bg-transparent font-semibold rounded-lg hover:bg-white hover:text-gray-900 transition">
@@ -140,6 +127,19 @@ const Navbar = ({ cartCount }) => {
                 Login
               </button>
             </Link>
+          </div>
+
+          {/* Navigation Links */}
+          <div className="mt-4 space-y-4 px-6">
+            {navLinks.map(({ id, label, icon }) => (
+              <button
+                key={id}
+                onClick={() => handleNavClick(id)}
+                className="flex items-center gap-3 w-full text-left text-white text-lg py-3 border-b border-gray-500"
+              >
+                {icon} {label}
+              </button>
+            ))}
           </div>
         </div>
       )}
