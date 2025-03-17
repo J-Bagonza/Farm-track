@@ -33,19 +33,28 @@ const ShoppingPage = () => {
   return (
     <>
       <Navbar cartCount={cartCount} />
-      <div className="w-[90%] mx-auto py-24">
-        <h2 className="text-3xl font-bold mb-6 text-orange-500 border-l-4 border-red-500 pl-4">Shop Products</h2>
+      <div className="w-[90%] mx-auto py-16">
+        
+        {/* Title & Subtitle */}
+        <div className="text-center mb-8">
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-green-500">
+            Welcome to Our Shop
+          </h1>
+          <h2 className="text-sm sm:text-base md:text-lg lg:text-xl text-blue-400 mt-1">
+            Contact Sales for Inquiries
+          </h2>
+        </div>
 
-        {/* Responsive Grid - 2 Columns for Small Screens, 4 for Larger Screens */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-6">
+        {/* Product Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
           {products.map((product, index) => (
             <motion.div
               key={product.id}
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="p-2 md:p-4 bg-transparent"
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className="p-3 bg-white shadow-md rounded-lg hover:shadow-lg transition"
             >
               <img 
                 src={product.image} 
@@ -55,7 +64,7 @@ const ShoppingPage = () => {
               <h3 className="mt-2 text-sm md:text-lg font-semibold text-gray-800">{product.name}</h3>
               <p className="text-xs md:text-sm text-gray-500">{product.category}</p>
 
-              <div className="flex items-center justify-between mt-1 md:mt-2">
+              <div className="flex items-center justify-between mt-2">
                 <span className="text-sm md:text-lg font-bold text-green-600">Ksh {product.price}</span>
                 <div className="flex items-center gap-1 md:gap-2">
                   <MdOutlineArrowDropDownCircle
@@ -70,7 +79,7 @@ const ShoppingPage = () => {
                 </div>
               </div>
 
-              <button className="mt-2 w-full border border-black text-black py-1 md:py-2 text-center text-xs md:text-base font-semibold uppercase hover:bg-black hover:text-white transition">
+              <button className="mt-2 w-full border border-gray-700 text-gray-700 py-1 md:py-2 text-center text-xs md:text-base font-semibold uppercase hover:bg-gray-700 hover:text-white transition">
                 View Details
               </button>
             </motion.div>
