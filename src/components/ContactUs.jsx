@@ -23,6 +23,7 @@ const ContactUs = () => {
     name: "",
     phone: "",
     email: "",
+    message: "",
   });
 
   useEffect(() => {
@@ -36,7 +37,7 @@ const ContactUs = () => {
   return (
     <section
       id="contact"
-      className="w-[90%] mx-auto mt-16 py-16 bg-white rounded-3xl flex flex-col lg:flex-row items-center px-6 md:px-16 shadow-lg"
+      className="w-[90%] mx-auto mt-16 pb-24 py-16 bg-white rounded-3xl flex flex-col lg:flex-row items-center px-6 md:px-16 shadow-lg"
     >
       {/* Left: Contact Form */}
       <div className="w-full lg:w-1/2 flex flex-col items-center text-center lg:pr-16">
@@ -49,60 +50,37 @@ const ContactUs = () => {
         </div>
 
         {/* Contact Form */}
-        <form className="w-full max-w-lg">
-          <div className="flex border rounded-lg overflow-hidden mb-4 h-12">
-            <motion.span
-              className="bg-orange-300 w-12 h-full flex items-center justify-center"
-              animate={inputValues.name ? "stop" : "animate"}
-              variants={shakeAnimation}
-            >
-              <FaUser className="text-gray-600" />
-            </motion.span>
-            <input
-              type="text"
-              placeholder="Full Name"
-              className="w-full p-3 focus:outline-none text-sm"
-              value={inputValues.name}
-              onChange={(e) => handleChange("name", e.target.value)}
-            />
-          </div>
+        <form className="w-full max-w-lg space-y-4">
+          {[
+            { type: "text", placeholder: "Full Name", icon: <FaUser className="text-gray-600" />, field: "name", bg: "bg-orange-300" },
+            { type: "tel", placeholder: "Phone Number", icon: <FaPhone className="text-gray-600" />, field: "phone", bg: "bg-red-300" },
+            { type: "email", placeholder: "Email Address", icon: <FaEnvelope className="text-white text-lg" />, field: "email", bg: "bg-green-300" },
+          ].map(({ type, placeholder, icon, field, bg }, index) => (
+            <div key={index} className="flex border rounded-lg overflow-hidden h-12">
+              <motion.span
+                className={`w-12 h-full flex items-center justify-center ${bg}`}
+                animate={inputValues[field] ? "stop" : "animate"}
+                variants={shakeAnimation}
+              >
+                {icon}
+              </motion.span>
+              <input
+                type={type}
+                placeholder={placeholder}
+                className="w-full p-3 focus:outline-none text-sm"
+                value={inputValues[field]}
+                onChange={(e) => handleChange(field, e.target.value)}
+              />
+            </div>
+          ))}
 
-          <div className="flex border rounded-lg overflow-hidden mb-4 h-12">
-            <motion.span
-              className="bg-red-300 w-12 h-full flex items-center justify-center"
-              animate={inputValues.phone ? "stop" : "animate"}
-              variants={shakeAnimation}
-            >
-              <FaPhone className="text-gray-600" />
-            </motion.span>
-            <input
-              type="tel"
-              placeholder="Phone Number"
-              className="w-full p-3 focus:outline-none text-sm"
-              value={inputValues.phone}
-              onChange={(e) => handleChange("phone", e.target.value)}
-            />
-          </div>
-
-          <div className="flex border rounded-lg overflow-hidden mb-4 h-12">
-            <motion.span
-              className="bg-green-300 w-12 h-full flex items-center justify-center"
-              animate={inputValues.email ? "stop" : "animate"}
-              variants={shakeAnimation}
-            >
-              <FaEnvelope className="text-white text-lg" />
-            </motion.span>
-            <input
-              type="email"
-              placeholder="Email Address"
-              className="w-full p-3 focus:outline-none text-sm"
-              value={inputValues.email}
-              onChange={(e) => handleChange("email", e.target.value)}
-            />
-          </div>
-
-          <div className="flex items-start border rounded-lg overflow-hidden mb-4">
-            <textarea placeholder="Your Message" className="w-full p-3 focus:outline-none resize-none h-32 text-sm"></textarea>
+          <div className="flex items-start border rounded-lg overflow-hidden">
+            <textarea
+              placeholder="Your Message"
+              className="w-full p-3 focus:outline-none resize-none h-32 text-sm"
+              value={inputValues.message}
+              onChange={(e) => handleChange("message", e.target.value)}
+            ></textarea>
           </div>
 
           <button className="flex items-center justify-center w-full bg-green-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300">
@@ -126,7 +104,7 @@ const ContactUs = () => {
           </h2>
         </div>
 
-        {/* Fun Facts List (2 columns on mobile) */}
+        {/* Fun Facts List */}
         <div className="mt-6 w-full grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-1">
           {funFacts.map((fact, index) => (
             <motion.div
