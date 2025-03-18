@@ -35,7 +35,7 @@ const Home = () => {
           className="mt-6 flex items-center gap-2 bg-red-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300"
           onClick={() => navigate("/resource-tracker")}
           initial={{ scale: 1 }}
-          animate={{ scale: [1, 1.05, 1] }}
+          animate={{ scale: [1, 1.15, 1] }} // Increased scaling effect
           transition={{ repeat: Infinity, duration: 1.2, ease: "easeInOut" }}
         >
           <FaHandPointer className="text-2xl animate-bounce" />
