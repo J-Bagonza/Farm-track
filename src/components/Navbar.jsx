@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { MdClose, MdInfoOutline } from "react-icons/md";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { RiHome3Line, RiContactsLine } from "react-icons/ri";
+import { SiHappycow } from "react-icons/si"; // VetConnect Icon
 import logo from "../assets/images/logo.png";
 import userIcon from "../assets/images/user.png";
 import cartIcon from "../assets/images/shoppingbasket.png";
@@ -13,7 +14,6 @@ const Navbar = ({ cartCount }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Close user dropdown when clicking outside
   useEffect(() => {
     const closeDropdown = (e) => {
       if (!e.target.closest(".user-menu")) setUserDropdownOpen(false);
@@ -22,14 +22,15 @@ const Navbar = ({ cartCount }) => {
     return () => document.removeEventListener("click", closeDropdown);
   }, []);
 
-  // Disable scrolling when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? "hidden" : "auto";
   }, [mobileMenuOpen]);
 
-  const handleNavClick = (id) => {
+  const handleNavClick = (id, path) => {
     setMobileMenuOpen(false);
-    if (location.pathname === "/") {
+    if (path) {
+      navigate(path);
+    } else if (location.pathname === "/") {
       const section = document.getElementById(id);
       if (section) section.scrollIntoView({ behavior: "smooth" });
     } else {
@@ -38,9 +39,10 @@ const Navbar = ({ cartCount }) => {
   };
 
   const navLinks = [
-    { id: "home", label: "Home", icon: <RiHome3Line className="text-2xl text-green-400" /> },
-    { id: "about", label: "About Us", icon: <MdInfoOutline className="text-2xl text-blue-400" /> },
-    { id: "contact", label: "Contact", icon: <RiContactsLine className="text-2xl text-orange-400" /> },
+    { id: "home", label: "Home", icon: <RiHome3Line className="text-2xl text-green-400" />, path: "/" },
+    { id: "about", label: "About Us", icon: <MdInfoOutline className="text-2xl text-blue-400" />, path: "/#about" },
+    { id: "contact", label: "Contact", icon: <RiContactsLine className="text-2xl text-orange-400" />, path: "/#contact" },
+    { id: "vetconnect", label: "VetConnect", icon: <SiHappycow className="text-2xl text-purple-400" />, path: "/vetconnect" }, // VetConnect added
   ];
 
   return (
@@ -53,8 +55,8 @@ const Navbar = ({ cartCount }) => {
 
       {/* Center - Desktop Navigation */}
       <div className="hidden md:flex gap-10">
-        {navLinks.map(({ id, label }) => (
-          <button key={id} onClick={() => handleNavClick(id)} className="hover:text-green-600 relative">
+        {navLinks.map(({ id, label, path }) => (
+          <button key={id} onClick={() => handleNavClick(id, path)} className="hover:text-green-600 relative">
             {label}
             <span className="absolute bottom-0 left-0 w-full h-1 bg-green-500 scale-x-0 transition-transform hover:scale-x-100"></span>
           </button>
@@ -131,10 +133,10 @@ const Navbar = ({ cartCount }) => {
 
           {/* Navigation Links */}
           <div className="mt-4 space-y-4 px-6">
-            {navLinks.map(({ id, label, icon }) => (
+            {navLinks.map(({ id, label, icon, path }) => (
               <button
                 key={id}
-                onClick={() => handleNavClick(id)}
+                onClick={() => handleNavClick(id, path)}
                 className="flex items-center gap-3 w-full text-left text-white text-lg py-3 border-b border-gray-500"
               >
                 {icon} {label}
