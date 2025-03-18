@@ -37,7 +37,7 @@ const ContactUs = () => {
   return (
     <section
       id="contact"
-      className="w-[90%] mx-auto mt-16 pb-24 py-16 bg-white rounded-3xl flex flex-col lg:flex-row items-center px-6 md:px-16 shadow-lg"
+      className="w-[90%] mx-auto mt-16 pb-32 py-16 bg-white rounded-3xl flex flex-col lg:flex-row items-center px-6 md:px-16 shadow-lg"
     >
       {/* Left: Contact Form */}
       <div className="w-full lg:w-1/2 flex flex-col items-center text-center lg:pr-16">
@@ -58,7 +58,7 @@ const ContactUs = () => {
           ].map(({ type, placeholder, icon, field, bg }, index) => (
             <div key={index} className="flex border rounded-lg overflow-hidden h-12">
               <motion.span
-                className={`w-12 h-full flex items-center justify-center ${bg}`}
+                className={`${bg} w-12 h-full flex items-center justify-center`}
                 animate={inputValues[field] ? "stop" : "animate"}
                 variants={shakeAnimation}
               >

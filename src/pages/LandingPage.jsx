@@ -27,7 +27,7 @@ const LandingPage = () => {
       </main>
 
       {/* Footer - Stays at the bottom */}
-      <Footer />
+    <Footer />
     </div>
   );
 };
