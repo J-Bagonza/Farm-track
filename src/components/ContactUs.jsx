@@ -56,9 +56,9 @@ const ContactUs = () => {
             { type: "tel", placeholder: "Phone Number", icon: <FaPhone className="text-gray-600" />, field: "phone", bg: "bg-red-300" },
             { type: "email", placeholder: "Email Address", icon: <FaEnvelope className="text-white text-lg" />, field: "email", bg: "bg-green-300" },
           ].map(({ type, placeholder, icon, field, bg }, index) => (
-            <div key={index} className="flex border rounded-md overflow-hidden h-12">
+            <div key={index} className="flex border overflow-hidden h-12">
               <motion.span
-                className={`${bg} w-12 h-full flex items-center justify-center rounded-md`}
+                className={`${bg} w-12 h-full flex items-center justify-center rounded-l-md`}
                 animate={inputValues[field] ? "stop" : "animate"}
                 variants={shakeAnimation}
               >
@@ -67,14 +67,14 @@ const ContactUs = () => {
               <input
                 type={type}
                 placeholder={placeholder}
-                className="w-full p-3 focus:outline-none text-sm rounded-md"
+                className="w-full p-3 focus:outline-none text-sm rounded-r-md"
                 value={inputValues[field]}
                 onChange={(e) => handleChange(field, e.target.value)}
               />
             </div>
           ))}
 
-          <div className="flex items-start border rounded-md overflow-hidden">
+          <div className="flex items-start border overflow-hidden">
             <textarea
               placeholder="Your Message"
               className="w-full p-3 focus:outline-none resize-none h-32 text-sm rounded-md"
@@ -105,11 +105,11 @@ const ContactUs = () => {
         </div>
 
         {/* Fun Facts List */}
-        <div className="mt-6 w-full grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-1">
+        <div className="mt-6 w-full grid grid-cols-2 gap-3 md:grid-cols-2 lg:grid-cols-1">
           {funFacts.map((fact, index) => (
             <motion.div
               key={index}
-              className={`flex items-center justify-center text-center p-3 bg-gray-100 rounded-lg shadow-md border-l-4 ${fact.color} h-24`}
+              className={`flex items-center justify-center text-center p-4 bg-gray-100 rounded-lg shadow-md border-l-4 ${fact.color} h-28 md:h-32`}
               initial={{ opacity: 0, y: 20 }}
               animate={animateFacts ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.2 }}
