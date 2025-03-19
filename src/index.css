@@ -2,31 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  /* Card wrapper - acts as the animated border */
-  .card-wrapper {
-    @apply relative overflow-hidden rounded-2xl bg-gradient-to-b from-slate-700 to-slate-800;
+.card-wrapper {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
   }
-
-  /* Animated Gradient Border */
+  
   .card-wrapper::before {
     content: "";
     position: absolute;
-    left: -25%;
-    top: -25%;
-    width: 150%;
-    height: 150%;
-    background: conic-gradient(
-      rgba(244, 114, 182, 0.4) 0deg,
-      rgba(192, 132, 252, 0.4) 0deg,
-      transparent 80deg
-    );
-    animation: border-spin 7s linear infinite;
+    inset: -5px;
+    background: conic-gradient(from 0deg, #4f46e5, #9333ea, #ec4899, #f59e0b, #4f46e5);
+    animation: rotateBorder 3s linear infinite;
+    z-index: -1;
   }
-
-  /* Inner content (dark background) */
+  
   .card-content {
-    @apply absolute left-[1px] top-[1px] h-[calc(100%-2px)] w-[calc(100%-2px)] 
-           rounded-2xl bg-gradient-to-b from-slate-800 to-slate-900 p-5;
+    background-color: rgba(0, 0, 0, 0.85);
+    padding: 1rem;
+    border-radius: 10px;
+    position: relative;
+    z-index: 1;
   }
-}
+  
+  @keyframes rotateBorder {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
