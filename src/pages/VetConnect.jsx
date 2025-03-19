@@ -74,18 +74,18 @@ const VetConnect = () => {
           {doctors.map((doctor, index) => (
             <motion.div
               key={index}
-              className="card-wrapper h-[220px] w-full md:w-[300px]"
+              className="relative overflow-hidden rounded-xl p-[2px] bg-gradient-to-r from-pink-500 via-purple-500 to-blue-500 animate-border-spin"
               initial={{ opacity: 0, y: 50 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <div className="card-content flex flex-col gap-3 p-5">
+              <div className="bg-gray-900 rounded-xl p-5">
                 <div className="flex items-center gap-3">
                   <FaUserDoctor className="text-4xl text-blue-400" />
-                  <h2 className="text-xl font-semibold text-gray-700">{doctor.name}</h2>
+                  <h2 className="text-xl font-semibold text-white">{doctor.name}</h2>
                 </div>
-                <p className="text-gray-600">{doctor.specialization}</p>
-                <div className="flex justify-between text-sm text-gray-600 mt-2">
+                <p className="text-gray-400">{doctor.specialization}</p>
+                <div className="flex justify-between text-sm text-gray-400 mt-2">
                   <div className="flex items-center gap-2">
                     <MdOutlineAddLocationAlt className="text-red-500 text-lg" />
                     <span>{doctor.location}</span>
