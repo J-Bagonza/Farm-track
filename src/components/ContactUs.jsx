@@ -36,9 +36,10 @@ const ContactUs = () => {
 
   return (
     <section
-      id="contact"
-      className="w-[90%] mx-auto mt-16 pb-32 py-16 bg-white rounded-3xl flex flex-col lg:flex-row items-center px-6 md:px-16 shadow-lg"
-    >
+  id="contact"
+  className="w-[90%] mx-auto mt-16 pb-32 py-16 bg-white rounded-t-3xl flex flex-col lg:flex-row items-center px-6 md:px-16 shadow-lg"
+>
+
       {/* Left: Contact Form */}
       <div className="w-full lg:w-1/2 flex flex-col items-center text-center lg:pr-16">
         <div className="flex items-center mb-6">
