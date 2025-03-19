@@ -157,15 +157,17 @@ const Navbar = ({ cartCount }) => {
               Login
             </button>
           </div>
-          <div className="px-6 space-y-4">
+          <div className="px-6">
             {navLinks.map(({ id, label, icon, path }) => (
-              <button
-                key={id}
-                onClick={() => handleNavClick(id, path)}
-                className="flex items-center gap-3 text-lg py-3 text-white hover:text-green-400"
-              >
-                {icon} {label}
-              </button>
+              <div key={id}>
+                <button
+                  onClick={() => handleNavClick(id, path)}
+                  className="flex items-center gap-3 text-lg py-3 text-white hover:text-green-400"
+                >
+                  {icon} {label}
+                </button>
+                <hr className="border-gray-600" /> {/* Divider under each link */}
+              </div>
             ))}
           </div>
         </div>
