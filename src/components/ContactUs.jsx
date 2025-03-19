@@ -37,7 +37,7 @@ const ContactUs = () => {
   return (
     <section
       id="contact"
-      className="w-[90%] mx-auto mt-16 pb-32 py-16 rounded-t-3xl flex flex-col lg:flex-row items-center px-6 md:px-16 shadow-lg bg-gradient-to-b from-purple-300 to-orange-200"
+      className="w-[90%] mx-auto mt-16 pb-32 py-16 rounded-3xl flex flex-col lg:flex-row items-center px-6 md:px-16 shadow-lg bg-gradient-to-b from-purple-300 to-orange-200 mb-24"
     >
       {/* Left: Contact Form */}
       <div className="w-full lg:w-1/2 flex flex-col items-center text-center lg:pr-16">
@@ -56,9 +56,9 @@ const ContactUs = () => {
             { type: "tel", placeholder: "Phone Number", icon: <FaPhone className="text-gray-600" />, field: "phone", bg: "bg-red-300" },
             { type: "email", placeholder: "Email Address", icon: <FaEnvelope className="text-white text-lg" />, field: "email", bg: "bg-green-300" },
           ].map(({ type, placeholder, icon, field, bg }, index) => (
-            <div key={index} className="flex border rounded-lg overflow-hidden h-12">
+            <div key={index} className="flex border rounded-md overflow-hidden h-12">
               <motion.span
-                className={`${bg} w-12 h-full flex items-center justify-center`}
+                className={`${bg} w-12 h-full flex items-center justify-center rounded-md`}
                 animate={inputValues[field] ? "stop" : "animate"}
                 variants={shakeAnimation}
               >
@@ -67,23 +67,23 @@ const ContactUs = () => {
               <input
                 type={type}
                 placeholder={placeholder}
-                className="w-full p-3 focus:outline-none text-sm"
+                className="w-full p-3 focus:outline-none text-sm rounded-md"
                 value={inputValues[field]}
                 onChange={(e) => handleChange(field, e.target.value)}
               />
             </div>
           ))}
 
-          <div className="flex items-start border rounded-lg overflow-hidden">
+          <div className="flex items-start border rounded-md overflow-hidden">
             <textarea
               placeholder="Your Message"
-              className="w-full p-3 focus:outline-none resize-none h-32 text-sm"
+              className="w-full p-3 focus:outline-none resize-none h-32 text-sm rounded-md"
               value={inputValues.message}
               onChange={(e) => handleChange("message", e.target.value)}
             ></textarea>
           </div>
 
-          <button className="flex items-center justify-center w-full bg-green-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300">
+          <button className="flex items-center justify-center w-full bg-green-600 text-white font-bold py-3 px-6 rounded-md hover:bg-green-700 transition duration-300">
             <FaPaperPlane className="mr-2" />
             Send Message
           </button>
@@ -109,12 +109,12 @@ const ContactUs = () => {
           {funFacts.map((fact, index) => (
             <motion.div
               key={index}
-              className={`flex items-center justify-center text-center p-2 md:p-3 bg-gray-100 rounded-lg shadow-md border-l-4 ${fact.color} h-24`}
+              className={`flex items-center justify-center text-center p-3 bg-gray-100 rounded-lg shadow-md border-l-4 ${fact.color} h-24`}
               initial={{ opacity: 0, y: 20 }}
               animate={animateFacts ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.2 }}
             >
-              <p className="text-gray-800 text-xs md:text-sm">{fact.fact}</p>
+              <p className="text-gray-800 text-sm md:text-base">{fact.fact}</p>
             </motion.div>
           ))}
         </div>
