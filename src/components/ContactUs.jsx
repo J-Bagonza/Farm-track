@@ -56,7 +56,7 @@ const ContactUs = () => {
             { type: "tel", placeholder: "Phone Number", icon: <FaPhone className="text-gray-600" />, field: "phone", bg: "bg-red-300" },
             { type: "email", placeholder: "Email Address", icon: <FaEnvelope className="text-white text-lg" />, field: "email", bg: "bg-green-300" },
           ].map(({ type, placeholder, icon, field, bg }, index) => (
-            <div key={index} className="flex border overflow-hidden h-12">
+            <div key={index} className="flex border rounded-md overflow-hidden h-12">
               <motion.span
                 className={`${bg} w-12 h-full flex items-center justify-center rounded-l-md`}
                 animate={inputValues[field] ? "stop" : "animate"}
@@ -74,7 +74,7 @@ const ContactUs = () => {
             </div>
           ))}
 
-          <div className="flex items-start border overflow-hidden">
+          <div className="flex items-start border rounded-md overflow-hidden">
             <textarea
               placeholder="Your Message"
               className="w-full p-3 focus:outline-none resize-none h-32 text-sm rounded-md"
