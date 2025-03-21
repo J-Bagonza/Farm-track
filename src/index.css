@@ -34,32 +34,4 @@
     }
   }
   
-  .effect {
-    position: absolute;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: -1;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .particle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: var(--size);
-    height: var(--size);
-    background: linear-gradient(45deg, rgba(139, 92, 246, 1) 0%, rgba(253, 186, 116, 1) 100%);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    animation: fly var(--duration) linear forwards;
-  }
-  @keyframes fly {
-    0% {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-    100% {
-      opacity: 0;
-      transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(0);
-    }
-  }
+
