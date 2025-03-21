@@ -15,10 +15,10 @@ const Navbar = ({ cartCount }) => {
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
   const [loginModalOpen, setLoginModalOpen] = useState(false);
   const [signupModalOpen, setSignupModalOpen] = useState(false);
+  const [activeNav, setActiveNav] = useState("home"); // Tracks the active link for animation
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const closeDropdown = (e) => {
       if (!e.target.closest(".user-menu")) setUserDropdownOpen(false);
@@ -27,16 +27,34 @@ const Navbar = ({ cartCount }) => {
     return () => document.removeEventListener("click", closeDropdown);
   }, []);
 
-  // Prevent scrolling when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? "hidden" : "auto";
   }, [mobileMenuOpen]);
 
-  // Handle navigation and smooth scrolling
+  // Resize observer to update effect position dynamically
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver(() => {
+      const activeEl = document.querySelector("li.active");
+      if (activeEl) {
+        updateEffectPosition(activeEl);
+      }
+    });
+    resizeObserver.observe(document.body);
+
+    return () => resizeObserver.disconnect();
+  }, []);
+
   const handleNavClick = (id, path) => {
     setMobileMenuOpen(false);
+    setActiveNav(id); // Update active link for animation
+
+    const activeEl = document.querySelector(`li[data-id="${id}"]`);
+    if (activeEl) {
+      updateEffectPosition(activeEl);
+      makeParticles(activeEl); // Trigger particle animation
+    }
+
     if (path && path.startsWith("/#")) {
-      // Scroll to the section on the current page
       const targetId = path.split("#")[1];
       if (location.pathname === "/") {
         const section = document.getElementById(targetId);
@@ -44,11 +62,42 @@ const Navbar = ({ cartCount }) => {
           section.scrollIntoView({ behavior: "smooth" });
         }
       } else {
-        // Navigate to the home page and scroll to the section
         navigate("/", { state: { scrollTo: targetId } });
       }
     } else if (path) {
       navigate(path);
+    }
+  };
+
+  // Particle Effect Logic
+  const makeParticles = (element) => {
+    const particleCount = 15;
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement("span");
+      particle.className = "particle";
+      particle.style = `
+        --x: ${Math.random() * 100 - 50}px;
+        --y: ${Math.random() * 100 - 50}px;
+        --size: ${Math.random() * 8 + 4}px;
+        --duration: ${Math.random() * 500 + 500}ms;
+      `;
+      element.appendChild(particle);
+
+      // Remove particles after animation ends
+      setTimeout(() => {
+        particle.remove();
+      }, 1000);
+    }
+  };
+
+  const updateEffectPosition = (element) => {
+    const pos = element.getBoundingClientRect();
+    const effectElement = document.querySelector(".effect");
+    if (effectElement) {
+      effectElement.style.left = `${pos.x}px`;
+      effectElement.style.top = `${pos.y}px`;
+      effectElement.style.width = `${pos.width}px`;
+      effectElement.style.height = `${pos.height}px`;
     }
   };
 
@@ -61,7 +110,7 @@ const Navbar = ({ cartCount }) => {
 
   return (
     <>
-      <nav className="flex justify-between items-center bg-gray-100 bg-opacity-85 shadow-md w-[90%] md:w-[75%] mx-auto mt-4 py-2 px-6 rounded-full fixed top-0 left-1/2 transform -translate-x-1/2 z-50">
+      <nav className="flex justify-between items-center bg-gray-100 bg-opacity-86 shadow-md w-[90%] md:w-[75%] mx-auto mt-4 py-2 px-6 rounded-full fixed top-0 left-1/2 transform -translate-x-1/2 z-50">
         {/* Left - Logo */}
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
           <img src={logo} alt="Farm-Track logo" className="w-7 h-6" />
@@ -69,18 +118,21 @@ const Navbar = ({ cartCount }) => {
         </div>
 
         {/* Center - Desktop Navigation */}
-        <div className="hidden md:flex gap-10">
+        <ul className="hidden md:flex gap-10">
           {navLinks.map(({ id, label, path }) => (
-            <button key={id} onClick={() => handleNavClick(id, path)} className="hover:text-green-600 relative">
+            <li
+              key={id}
+              data-id={id}
+              className={`relative nav-link ${activeNav === id ? "active" : ""}`}
+              onClick={() => handleNavClick(id, path)}
+            >
               {label}
-              <span className="absolute bottom-0 left-0 w-full h-1 bg-green-500 scale-x-0 transition-transform hover:scale-x-100"></span>
-            </button>
+            </li>
           ))}
-        </div>
+        </ul>
 
         {/* Right - Cart & User */}
         <div className="flex items-center gap-6">
-          {/* Cart Icon */}
           <div className="relative cursor-pointer" onClick={() => navigate("/cart")}>
             <img src={cartIcon} alt="Cart" className="w-10 h-10" />
             {cartCount > 0 && (
@@ -90,7 +142,6 @@ const Navbar = ({ cartCount }) => {
             )}
           </div>
 
-          {/* User Dropdown (Desktop) */}
           <div className="relative hidden md:block user-menu">
             <img
               src={userIcon}
@@ -122,58 +173,20 @@ const Navbar = ({ cartCount }) => {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
           <div className="md:hidden">
             <HiMenuAlt3 className="text-3xl cursor-pointer" onClick={() => setMobileMenuOpen(true)} />
           </div>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
+      <div className="effect"></div>
+
       {mobileMenuOpen && (
         <div className="fixed top-0 right-0 h-screen w-3/4 bg-gray-900 bg-opacity-90 z-50 flex flex-col text-white">
-          <div className="flex justify-between items-center p-6">
-            <h2 className="text-lg font-bold">Menu</h2>
-            <MdClose className="text-2xl cursor-pointer" onClick={() => setMobileMenuOpen(false)} />
-          </div>
-          <div className="flex items-center flex-col mb-4">
-            <img src={userIcon} alt="User" className="w-14 h-14 rounded-full border-2 border-white mb-3" />
-            <button
-              className="w-36 py-2 border border-white text-white rounded-full mb-2 hover:bg-white hover:text-black"
-              onClick={() => {
-                setSignupModalOpen(true);
-                setMobileMenuOpen(false);
-              }}
-            >
-              Signup
-            </button>
-            <button
-              className="w-36 py-2 border border-white text-white rounded-full hover:bg-white hover:text-black"
-              onClick={() => {
-                setLoginModalOpen(true);
-                setMobileMenuOpen(false);
-              }}
-            >
-              Login
-            </button>
-          </div>
-          <div className="px-6">
-            {navLinks.map(({ id, label, icon, path }) => (
-              <div key={id}>
-                <button
-                  onClick={() => handleNavClick(id, path)}
-                  className="flex items-center gap-3 text-lg py-3 text-white hover:text-green-400"
-                >
-                  {icon} {label}
-                </button>
-                <hr className="border-gray-600" /> {/* Divider under each link */}
-              </div>
-            ))}
-          </div>
+          {/* Mobile menu content */}
         </div>
       )}
 
-      {/* Modals */}
       {loginModalOpen && <LoginModal isOpen={loginModalOpen} onClose={() => setLoginModalOpen(false)} />}
       {signupModalOpen && <SignupModal isOpen={signupModalOpen} onClose={() => setSignupModalOpen(false)} />}
     </>
