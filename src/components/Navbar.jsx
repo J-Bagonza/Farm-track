@@ -123,7 +123,7 @@ const Navbar = ({ cartCount }) => {
             <li
               key={id}
               data-id={id}
-              className={`relative nav-link ${activeNav === id ? "active" : ""}`}
+              className={`relative nav-link ${activeNav === id ? "active" : ""}}
               onClick={() => handleNavClick(id, path)}
             >
               {label}
