@@ -87,7 +87,7 @@ const ResourceTracker = () => {
             </div>
           </div>
 
-          {/* Tracking Form */}
+          {/* Tracking For */}
           <form className="w-full sm:w-[90%] md:w-[80%] lg:w-[65%] mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-lg" onSubmit={handleSubmit}>
             {/* Resource Dropdown */}
             <div className="relative mb-4" ref={dropdownRef}>
